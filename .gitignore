@@ -1,0 +1,15 @@
+# 忽略微调模型文件夹
+fine-tuned-model
+
+# 忽略MLflow运行记录
+mlruns
+
+# 忽略日志文件夹
+logs
+
+# 忽略训练结果检查点
+results/checkpoint-*
+
+# 忽略评估结果文件
+evaluation_results_finetuned.json
+detailed_results_finetuned.csv

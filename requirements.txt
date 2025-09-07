@@ -1,0 +1,8 @@
+torch
+transformers
+datasets
+tqdm
+rouge-score
+pandas
+peft
+deepspeed
