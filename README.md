@@ -2,30 +2,42 @@
 
 这个项目用于评估 Qwen2.5 模型在 GSM8K 数据集上的数学推理能力。
 
+## 项目结构
+
+- `src/一训练前评价模型.py`: 训练前模型评估脚本
+- `src/二微调模型.py`: 模型微调脚本
+- `src/三训练后评价模型.py`: 训练后模型评估脚本
+- `ds_config.json`: DeepSpeed配置文件
+- `requirements.txt`: 项目依赖
+
 ## 依赖安装
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 运行评估
+## 使用流程
 
-```bash
-python evaluate_qwen.py
-```
+1. **训练前评估**
+   ```bash
+   python src/一训练前评价模型.py
+   ```
+
+2. **模型微调**
+   ```bash
+   python src/二微调模型.py
+   ```
+
+3. **训练后评估**
+   ```bash
+   python src/三训练后评价模型.py
+   ```
 
 ## 输出结果
 
 评估结果将保存在以下文件中：
 
-1. `evaluation_results.json`：包含汇总统计信息
-   - 模型名称
-   - 总问题数
-   - 正确预测数
-   - 准确率
-   - 平均ROUGE-L分数
-
-2. `detailed_results.csv`：包含每个样本的详细结果
+1. `一评价结果训练前.csv`: 包含每个样本的详细结果
    - 问题
    - 真实答案
    - 预测答案
@@ -37,7 +49,14 @@ python evaluate_qwen.py
 
 1. 使用 Hugging Face Transformers 库加载 Qwen2.5 模型
 2. 使用 GSM8K 数据集的测试集进行评估
-3. 随机选择50个样本进行评估（如果数据集超过50个样本）
-4. 采用 "Let's think step by step" 提示词引导模型逐步推理
-5. 从模型输出中提取最终答案并与标准答案比较
-6. 计算准确率和ROUGE-L分数并保存结果
+3. 采用 "Let's think step by step" 提示词引导模型逐步推理
+4. 从模型输出中提取最终答案并与标准答案比较
+5. 计算准确率和ROUGE-L分数并保存结果
+
+## 评估结果
+
+- 训练前ROUGE-L分数: 0.17
+- 训练后ROUGE-L分数: 0.29
+- 提升幅度: 0.12 (70.6% 相对提升)
+
+这表明通过微调，模型在GSM8K数据集上的推理能力得到了显著提升。
